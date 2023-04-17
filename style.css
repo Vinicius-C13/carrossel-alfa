@@ -99,3 +99,61 @@ body {
 .carrossel img {
   box-shadow: 0px 0px 40px 2px var(--corUm);
 }
+
+.info {
+  transition: all 1s ease 0.1s;
+}
+
+.elementToFadeInAndOut {
+  -webkit-animation: fadeinout 4s linear forwards;
+  animation: fadeinout 4s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeinout {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.down {
+  animation: down 0.3s linear forwards;
+}
+
+.up {
+  animation: up 0.3s linear forwards;
+}
+
+@keyframes up {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes down {
+  0% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+}
