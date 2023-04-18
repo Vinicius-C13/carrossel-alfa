@@ -45,11 +45,12 @@ navButtons.forEach((btn) => {
     e.target.classList.add("ativo");
     index = parseInt(e.target.id);
 
-    mudarCardComClique(index);
+    mudarCard();
+    timer.reset();
   });
 });
 
-function mudarCardComClique() {
+function mudarCard() {
   info.classList.add("down");
   image.classList.add("fadeout");
   localIndex = index;
@@ -59,19 +60,6 @@ function mudarCardComClique() {
     info.classList.remove("down");
     info.innerHTML = criaElemento(listaCarrossel[localIndex]);
     image.src = listaCarrossel[localIndex].imagem;
-  }, 400);
-  timer.reset();
-}
-
-function mudarCard() {
-  info.classList.add("down");
-  image.classList.add("fadeout");
-  setTimeout(() => {
-    image.classList.remove("fadeout");
-    image.classList.add("fadein");
-    info.classList.remove("down");
-    info.innerHTML = criaElemento(listaCarrossel[index]);
-    image.src = listaCarrossel[index].imagem;
   }, 400);
 }
 
