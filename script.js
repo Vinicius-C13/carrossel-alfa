@@ -63,11 +63,19 @@ function mudarCard() {
   }, 400);
 }
 
-function setIndex() {
-  if (index >= listaCarrossel.length - 1) {
-    index = 0;
+function setIndex(left = false) {
+  if (left) {
+    if (index <= 0) {
+      index = listaCarrossel.length - 1;
+    } else {
+      index--;
+    }
   } else {
-    index++;
+    if (index >= listaCarrossel.length - 1) {
+      index = 0;
+    } else {
+      index++;
+    }
   }
 }
 
@@ -124,3 +132,68 @@ let timer = new Timer(function () {
   mudarCard();
   setAtivo();
 }, 5000);
+
+document
+  .querySelector(".carrossel")
+  .addEventListener("touchstart", handleTouchStart, false);
+document
+  .querySelector(".carrossel")
+  .addEventListener("touchmove", handleTouchMove, false);
+
+var xDown = null;
+var yDown = null;
+
+function getTouches(evt) {
+  return (
+    evt.touches || // browser API
+    evt.originalEvent.touches
+  ); // jQuery
+}
+
+function handleTouchStart(evt) {
+  const firstTouch = getTouches(evt)[0];
+  xDown = firstTouch.clientX;
+  yDown = firstTouch.clientY;
+}
+
+function handleTouchMove(evt) {
+  if (!xDown || !yDown) {
+    return;
+  }
+
+  var xUp = evt.touches[0].clientX;
+  var yUp = evt.touches[0].clientY;
+
+  var xDiff = xDown - xUp;
+  var yDiff = yDown - yUp;
+
+  if (Math.abs(xDiff) > Math.abs(yDiff)) {
+    /*most significant*/
+    if (xDiff > 0) {
+      /* right swipe */
+      setIndex();
+      mudarCard();
+      setAtivo();
+      timer.reset();
+      console.log("teste direita");
+    } else {
+      /* left swipe */
+      mudarCard();
+      setIndex(true);
+      console.log(index);
+      mudarCard();
+      setAtivo();
+      timer.reset();
+      console.log("teste esquerda");
+    }
+  } else {
+    if (yDiff > 0) {
+      /* down swipe */
+    } else {
+      /* up swipe */
+    }
+  }
+  /* reset values */
+  xDown = null;
+  yDown = null;
+}
