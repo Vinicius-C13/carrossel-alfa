@@ -1,74 +1,139 @@
+let listaCarrossel = [
+  {
+    index: 0,
+    imagem: "https://place-hold.it/237x300/ff",
+    nomeDaPessoa: "Nome Pessoa 1",
+    informacoesPessoais: "Informações pessoais da pessoa",
+    descricao:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus atellus ante. Nulla sit amet nulla cursus, vehicula elit id, imperdietnunc. Nunc congue, orci in dapibus facilisis, libero ligula maximum neque, at tempus ligula ex non dui. Proin iaculis volutpat accumsan.",
+  },
+  {
+    index: 1,
+    imagem: "https://place-hold.it/237x300/E74C3C",
+    nomeDaPessoa: "Nome Pessoa 2",
+    informacoesPessoais: "Informações pessoais da pessoa",
+    descricao:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus atellus ante. Nulla sit amet nulla cursus, vehicula elit id, imperdietnunc. Nunc congue, orci in dapibus facilisis, libero ligula maximum neque, at tempus ligula ex non dui. Proin iaculis volutpat accumsan.",
+  },
+  {
+    index: 2,
+    imagem: "https://place-hold.it/237x300/58D68D",
+    nomeDaPessoa: "Nome Pessoa 3",
+    informacoesPessoais: "Informações pessoais da pessoa",
+    descricao:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus atellus ante. Nulla sit amet nulla cursus, vehicula elit id, imperdietnunc. Nunc congue, orci in dapibus facilisis, libero ligula maximum neque, at tempus ligula ex non dui. Proin iaculis volutpat accumsan.",
+  },
+  {
+    index: 3,
+    imagem: "https://place-hold.it/237x300/F4D03F",
+    nomeDaPessoa: "Nome Pessoa 4",
+    informacoesPessoais: "Informações pessoais da pessoa",
+    descricao:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus atellus ante. Nulla sit amet nulla cursus, vehicula elit id, imperdietnunc. Nunc congue, orci in dapibus facilisis, libero ligula maximum neque, at tempus ligula ex non dui. Proin iaculis volutpat accumsan.",
+  },
+];
+
 let navButtons = document.querySelectorAll(".nav-btn");
+let info = document.querySelector(".info");
+let image = document.querySelector(".imagem > img");
+
+let index = 0;
 
 navButtons.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     navButtons.forEach((btn) => btn.classList.remove("ativo"));
     e.target.classList.add("ativo");
-    let index = parseInt(e.target.id);
+    index = parseInt(e.target.id);
 
-    mudarCard(index);
+    mudarCardComClique(index);
   });
 });
 
-function mudarCard(index) {
-  let info = document.querySelector(".info");
+function mudarCardComClique() {
   info.classList.add("down");
+  image.classList.add("fadeout");
+  localIndex = index;
   setTimeout(() => {
+    image.classList.remove("fadeout");
+    image.classList.add("fadein");
     info.classList.remove("down");
-    console.log(index);
-    index ? (info.innerHTML = arr[index]) : (info.innerHTML = arr[0]);
-  }, 300);
+    info.innerHTML = criaElemento(listaCarrossel[localIndex]);
+    image.src = listaCarrossel[localIndex].imagem;
+  }, 400);
+  timer.reset();
 }
 
-let arr = [
-  `
-      <div class="titulo up">
-          <h2>Nome Pessoa 1</h2>
-          <h3>Informações pessoais da pessoa</h3>
-        </div>
-        <p class="descricao up">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a
-          tellus ante. Nulla sit amet nulla cursus, vehicula elit id, imperdiet
-          nunc. Nunc congue, orci in dapibus facilisis, libero ligula maximus
-          neque, at tempus ligula ex non dui. Proin iaculis volutpat accumsan.
-        </p>
-      </div>`,
-  `
-      <div class="titulo up">
-          <h2>Nome Pessoa 2</h2>
-          <h3>Informações pessoais da pessoa</h3>
-        </div>
-        <p class="descricao up">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a
-          tellus ante. Nulla sit amet nulla cursus, vehicula elit id, imperdiet
-          nunc. Nunc congue, orci in dapibus facilisis, libero ligula maximus
-          neque, at tempus ligula ex non dui. Proin iaculis volutpat accumsan.
-        </p>
-      </div>`,
-  `
-      <div class="titulo up">
-          <h2>Nome Pessoa 3</h2>
-          <h3>Informações pessoais da pessoa</h3>
-        </div>
-        <p class="descricao up">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a
-          tellus ante. Nulla sit amet nulla cursus, vehicula elit id, imperdiet
-          nunc. Nunc congue, orci in dapibus facilisis, libero ligula maximus
-          neque, at tempus ligula ex non dui. Proin iaculis volutpat accumsan.
-        </p>
-      </div>`,
-  `
-      <div class="titulo up">
-          <h2>Nome Pessoa 4</h2>
-          <h3>Informações pessoais da pessoa</h3>
-        </div>
-        <p class="descricao up">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a
-          tellus ante. Nulla sit amet nulla cursus, vehicula elit id, imperdiet
-          nunc. Nunc congue, orci in dapibus facilisis, libero ligula maximus
-          neque, at tempus ligula ex non dui. Proin iaculis volutpat accumsan.
-        </p>
-      </div>`,
-];
+function mudarCard() {
+  info.classList.add("down");
+  image.classList.add("fadeout");
+  setTimeout(() => {
+    image.classList.remove("fadeout");
+    image.classList.add("fadein");
+    info.classList.remove("down");
+    info.innerHTML = criaElemento(listaCarrossel[index]);
+    image.src = listaCarrossel[index].imagem;
+  }, 400);
+}
 
-mudarCard();
+function setIndex() {
+  if (index >= listaCarrossel.length - 1) {
+    index = 0;
+  } else {
+    index++;
+  }
+}
+
+function criaElemento(obj) {
+  return `
+  <div class="titulo up">
+      <h2>${obj.nomeDaPessoa}</h2>
+      <h3>${obj.informacoesPessoais}</h3>
+    </div>
+    <p class="descricao up">${obj.descricao}</p>
+  </div>`;
+}
+
+function Timer(fn, t) {
+  var timerObj = setInterval(fn, t);
+
+  this.stop = function () {
+    if (timerObj) {
+      clearInterval(timerObj);
+      timerObj = null;
+    }
+    return this;
+  };
+
+  // start timer using current settings (if it's not already running)
+  this.start = function () {
+    if (!timerObj) {
+      this.stop();
+      timerObj = setInterval(fn, t);
+    }
+    return this;
+  };
+
+  // start with new or original interval, stop current interval
+  this.reset = function (newT = t) {
+    t = newT;
+    console.log("do reset: " + index);
+    return this.stop().start();
+  };
+}
+
+var timer = new Timer(function () {
+  setIndex();
+  mudarCard();
+  console.log("do intervalo: " + index);
+}, 5000);
+
+// stop the timer
+//timer.stop();
+
+// start the timer
+//timer.start();
+
+/*setInterval(() => {
+  mudarCardAutomaticamente();
+  console.log(index);
+}, 3000);*/
