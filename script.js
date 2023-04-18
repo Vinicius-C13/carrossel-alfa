@@ -81,6 +81,15 @@ function criaElemento(obj) {
   </div>`;
 }
 
+function setAtivo() {
+  navButtons.forEach((btn) => {
+    if (btn.id == index.toString()) {
+      navButtons.forEach((btn) => btn.classList.remove("ativo"));
+      btn.classList.add("ativo");
+    }
+  });
+}
+
 function Timer(fn, t) {
   var timerObj = setInterval(fn, t);
 
@@ -104,24 +113,14 @@ function Timer(fn, t) {
   // start with new or original interval, stop current interval
   this.reset = function (newT = t) {
     t = newT;
-    console.log("do reset: " + index);
     return this.stop().start();
   };
 }
 
-var timer = new Timer(function () {
+mudarCard();
+
+let timer = new Timer(function () {
   setIndex();
   mudarCard();
-  console.log("do intervalo: " + index);
+  setAtivo();
 }, 5000);
-
-// stop the timer
-//timer.stop();
-
-// start the timer
-//timer.start();
-
-/*setInterval(() => {
-  mudarCardAutomaticamente();
-  console.log(index);
-}, 3000);*/

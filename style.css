@@ -26,7 +26,7 @@ body {
   align-items: center;
   justify-content: flex-end;
   width: 250px;
-  height: 630px;
+  min-height: 630px;
   padding: 25px;
   text-align: center;
   background-color: var(--corZero);
@@ -41,6 +41,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin-top: 180px;
 }
 
 .nav span {
@@ -92,15 +93,17 @@ body {
 
 .carrossel .imagem {
   position: absolute;
-  top: 0;
-  transform: translateY(-45%);
+  /*top: 0;
+  transform: translateY(-45%);*/
+  top: 170px;
+  transform: translateY(-100%);
   background-color: var(--corUm);
   max-height: min-content;
 }
 
 .carrossel img {
   display: block;
-  box-shadow: 0px 0px 40px 2px var(--corUm);
+  box-shadow: 0px 0px 35px 0px var(--corUm);
 }
 
 .info {
@@ -112,23 +115,6 @@ body {
   animation: fadeinout 4s linear forwards;
 }
 
-@keyframes fadein {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeout {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
 .down {
   animation: down 0.4s linear forwards;
 }
@@ -163,6 +149,24 @@ body {
   }
   100% {
     transform: translateY(50px);
+    opacity: 0;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
     opacity: 0;
   }
 }
